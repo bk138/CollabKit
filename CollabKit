@@ -12,7 +12,7 @@ INSTALLPATH=/opt/CollabKit
 # -nofb
 # -threads
 X11VNC_OPTS="-shared -forever -mdns -multiptr -pointer_mode 4 -threads"
-VIEWER_OPTS="-multilisten -quality 7 -compresslevel 5"
+VIEWER_OPTS="-appshare -quality 7 -compresslevel 5"
 
 
 
