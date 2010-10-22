@@ -1,0 +1,14 @@
+Source: collabkit
+Section: net
+Priority: extra
+Maintainer: Christian Beier <dontmind@freeshell.org>
+Build-Depends: debhelper (>= 7)
+Standards-Version: 3.7.3
+Homepage: http://wiki.informatik.hu-berlin.de/nomads/index.php/CollabKit
+
+Package: collabkit
+Architecture: i386
+Depends: zenity
+Description: Soundscape Generator
+ CollabKit is a multi-user multicast collaboration system
+

@@ -1,0 +1,20 @@
+This package was debianized by Christian Beier <dontmind@freeshell.org> on
+Mon, 10 May 2010 18:46:12 +0100.
+
+It was downloaded from http://wiki.informatik.hu-berlin.de/nomads/index.php/CollabKit
+
+Upstream Author:
+
+    Christian Beier <dontmind@freeshell.org>
+
+Copyright:
+
+    Copyright (C) 2010 Christian Beier 
+
+License:
+
+    GPL
+
+The Debian packaging is (C) 2010, Christian Beier <dontmind@freeshell.org> and
+is licensed under the GPL, see `/usr/share/common-licenses/GPL'.
+

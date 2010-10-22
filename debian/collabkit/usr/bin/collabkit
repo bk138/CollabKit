@@ -1,0 +1,72 @@
+#! /bin/sh
+#
+# very simple minded startup script for CollabKit
+# created by Christian Beier <dontmind@freeshell.org>
+
+# maybe change this one
+INSTALLPATH=/opt/CollabKit
+
+# possible speedups:
+# -noxdamage, -deferupdate 0, -input_skip <n>, -pointer_mode [1 or 4]
+# -ncache <n>
+# -nofb
+# -threads
+X11VNC_OPTS="-shared -forever -mdns -multiptr -pointer_mode 4 -threads"
+VIEWER_OPTS="-appshare -quality 7 -compresslevel 5"
+
+
+
+#######################################################################
+
+PATH=$INSTALLPATH/bin:$PATH
+
+ANNOTATE_PIDFILE=/tmp/CK-annotate.pid
+VNCSERV_PIDFILE=/tmp/CK-vncserv.pid
+VNCVIEW_PIDFILE=/tmp/CK-vncview.pid
+
+[ "$2" = "-with-msg" ] &&  MSG=yes
+
+#set -e
+
+start()
+{
+        # first, start annotation app
+	gromit-mpx &
+	echo $! > $ANNOTATE_PIDFILE
+        # then, the VNC server x11vnc
+	x11vnc $X11VNC_OPTS &
+	echo $! > $VNCSERV_PIDFILE
+	# third, the vnc viewer to receive incoming windows
+	vncviewer $VIEWER_OPTS &
+	echo $! > $VNCVIEW_PIDFILE
+	test ! -z $MSG && zenity --info --text="CollabKit started." 
+}
+
+
+stop()
+{
+	[ -e $ANNOTATE_PIDFILE ] && kill `cat $ANNOTATE_PIDFILE`
+        rm -f $ANNOTATE_PIDFILE
+       	[ -e $VNCSERV_PIDFILE ] && kill -2 `cat $VNCSERV_PIDFILE`
+	rm -f $VNCSERV_PIDFILE
+	[ -e $VNCVIEW_PIDFILE ] && kill `cat $VNCVIEW_PIDFILE`
+	rm -f $VNCVIEW_PIDFILE
+	test ! -z $MSG && zenity --info --text="CollabKit stopped."
+}
+
+
+case "$1" in
+  start)
+	stop
+	start
+	;;
+  stop)
+	stop
+	;;
+  *)
+	echo "Usage: $0 {start|stop}" >&2
+	exit 1
+	;;
+esac
+
+exit 0
