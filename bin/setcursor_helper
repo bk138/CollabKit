@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# cd working dir
+cd `dirname $0`
+# strip 0x
+RFB_CLIENT_ID=`echo $RFB_CLIENT_ID | sed s/0x//`
+# and go
+echo xi2setcursor called with label $RFB_CLIENT_ID
+./xi2setcursor -label $RFB_CLIENT_ID &
