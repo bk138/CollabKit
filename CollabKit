@@ -3,8 +3,6 @@
 # very simple minded startup script for CollabKit
 # created by Christian Beier <dontmind@freeshell.org>
 
-# maybe change this one
-INSTALLPATH=/opt/CollabKit
 
 # possible speedups:
 # -noxdamage, -deferupdate 0, -input_skip <n>, -pointer_mode [1 or 4]
@@ -15,10 +13,8 @@ X11VNC_OPTS="-shared -forever -mdns -multiptr -pointer_mode 4 -threads"
 VIEWER_OPTS="-appshare -quality 7 -compresslevel 5"
 
 
-
 #######################################################################
 
-PATH=$INSTALLPATH/bin:$PATH
 
 ANNOTATE_PIDFILE=/tmp/CK-annotate.pid
 VNCSERV_PIDFILE=/tmp/CK-vncserv.pid
@@ -30,14 +26,17 @@ VNCVIEW_PIDFILE=/tmp/CK-vncview.pid
 
 start()
 {
+        # go to working directory
+        cd `dirname $0`
+
         # first, start annotation app
-	gromit-mpx &
+	./bin/gromit-mpx &
 	echo $! > $ANNOTATE_PIDFILE
         # then, the VNC server x11vnc
-	x11vnc $X11VNC_OPTS &
+	./bin/x11vnc $X11VNC_OPTS &
 	echo $! > $VNCSERV_PIDFILE
 	# third, the vnc viewer to receive incoming windows
-	vncviewer $VIEWER_OPTS &
+	./bin/vncviewer $VIEWER_OPTS &
 	echo $! > $VNCVIEW_PIDFILE
 	test ! -z $MSG && zenity --info --text="CollabKit started." 
 }

@@ -2,8 +2,6 @@
 This package provides the neccesary tools to run a CollabKit Server (provided there
 already is a MPX-enabled X Server installed).
 
-NOTE: Change INSTALLPATH in the script if needed.
-
 To start,run
 $ ./CollabKit start
 
@@ -12,4 +10,3 @@ $ ./CollabKit stop
 
 Optionally, append -with-msg to get some visual feedback (uses zenity).
 
-There is also a helper script in bin to setup adhoc wireless networking.
