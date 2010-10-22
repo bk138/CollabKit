@@ -20,15 +20,10 @@ ANNOTATE_PIDFILE=/tmp/CK-annotate.pid
 VNCSERV_PIDFILE=/tmp/CK-vncserv.pid
 VNCVIEW_PIDFILE=/tmp/CK-vncview.pid
 
-[ "$2" = "-with-msg" ] &&  MSG=yes
-
 #set -e
 
 start()
 {
-        # go to working directory
-        cd `dirname $0`
-
         # first, start annotation app
 	./bin/gromit-mpx &
 	echo $! > $ANNOTATE_PIDFILE
@@ -38,7 +33,6 @@ start()
 	# third, the vnc viewer to receive incoming windows
 	./bin/vncviewer $VIEWER_OPTS &
 	echo $! > $VNCVIEW_PIDFILE
-	test ! -z $MSG && zenity --info --text="CollabKit started." 
 }
 
 
@@ -50,9 +44,43 @@ stop()
 	rm -f $VNCSERV_PIDFILE
 	[ -e $VNCVIEW_PIDFILE ] && kill `cat $VNCVIEW_PIDFILE`
 	rm -f $VNCVIEW_PIDFILE
-	test ! -z $MSG && zenity --info --text="CollabKit stopped."
 }
 
+
+runastrayicon()
+{
+   RUN=true
+
+   while($RUN)
+   do
+        # off state
+        zenity --notification --text "CollabKit is STOPPED. Click here to start it." --window-icon=res/stopped.svg
+        zenity --question --text "Would you like to start CollabKit? Answering NO quits."
+        if [ $? -eq 1 ]; then
+            RUN=false
+            break
+        fi
+        start
+        # on state
+        zenity --info --text="CollabKit started." 
+        zenity --notification --text "CollabKit is RUNNING. Click here to stop it." --window-icon=res/started.svg
+        zenity --question --text "Would you like to stop CollabKit? Answering NO quits."
+        if [ $? -eq 1 ]; then
+            RUN=false
+            break
+        fi
+        stop
+        # off state
+	zenity --info --text="CollabKit stopped."
+   done
+   
+   stop
+}
+
+
+
+# go to working directory
+cd `dirname $0`
 
 case "$1" in
   start)
@@ -62,8 +90,11 @@ case "$1" in
   stop)
 	stop
 	;;
+  trayicon)
+	runastrayicon
+	;;
   *)
-	echo "Usage: $0 {start|stop}" >&2
+	echo "Usage: $0 {start|stop|trayicon}" >&2
 	exit 1
 	;;
 esac

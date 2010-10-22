@@ -8,5 +8,9 @@ $ ./CollabKit start
 To stop,
 $ ./CollabKit stop
 
-Optionally, append -with-msg to get some visual feedback (uses zenity).
+
+To run some kind of interactively as a tray icon,
+$ ./CollabKit trayicon
+
+
 
