@@ -1,2 +1,0 @@
-?package(collabkit):needs="X11" section="Applications/Network"\
-  title="CollabKit" command="/usr/bin/collabkit"

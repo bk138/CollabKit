@@ -2,8 +2,7 @@ Source: collabkit
 Section: net
 Priority: extra
 Maintainer: Christian Beier <dontmind@freeshell.org>
-Build-Depends: debhelper (>= 7)
-Standards-Version: 3.7.3
+Standards-Version: 3.9.1
 Homepage: http://wiki.informatik.hu-berlin.de/nomads/index.php/CollabKit
 
 Package: collabkit
