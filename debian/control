@@ -8,7 +8,7 @@ Homepage: http://wiki.informatik.hu-berlin.de/nomads/index.php/CollabKit
 
 Package: collabkit
 Architecture: i386
-Depends: ${shlibs:Depends}, zenity
+Depends: ${shlibs:Depends}, zenity, xserver-xorg (>= 7.5)
 Description: Multi-user multicast collaboration system
  CollabKit is a multi-user multicast collaboration system
 
