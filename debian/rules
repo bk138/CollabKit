@@ -15,6 +15,8 @@ binary-indep:
 # icons
 	install -m 644 -D res/collabkit-started.svg debian/tmp/usr/share/icons/collabkit-started.svg
 	install -m 644 -D res/collabkit-stopped.svg debian/tmp/usr/share/icons/collabkit-stopped.svg
+# desktop file
+	install -m 644 -D debian/CollabKit.desktop debian/tmp/usr/share/applications/CollabKit.desktop
 # now the docs
 	install -m 644 -D debian/copyright debian/tmp/usr/share/doc/collabkit/copyright
 	install -m 644 -D README debian/tmp/usr/share/doc/collabkit/README
