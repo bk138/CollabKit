@@ -10,5 +10,12 @@ Package: collabkit
 Architecture: i386
 Depends: ${shlibs:Depends}, zenity, xserver-xorg (>= 7.5)
 Description: Multi-user multicast collaboration system
- CollabKit is a multi-user multicast collaboration system
+ CollabKit is a multi-user multicast collaboration system.
+ Features:
+  * Concurrent multi-user operation
+  * Concurrent multi-user annotation drawing on screen
+  * Efficient multicast data transmission
+  * Client-to-Server window sharing
+ .
+ A sample multi-user sketchpad called MalaMinya is included as well.
 

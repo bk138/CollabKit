@@ -2,7 +2,7 @@
 VERSION := $(shell dpkg-parsechangelog | grep ^Version | cut -d' ' -f2-)
 
 build:
-binary: binary-indep
+binary: clean binary-indep
 binary-arch:
 binary-indep:
 # first the bins and helper scripts
@@ -12,11 +12,15 @@ binary-indep:
 	install -m 755 -D bin/gromit-mpx debian/collabkit/usr/lib/collabkit/gromit-mpx
 	install -m 755 -D bin/xi2setcursor debian/collabkit/usr/lib/collabkit/xi2setcursor
 	install -m 755 -D bin/setcursor_helper debian/collabkit/usr/lib/collabkit/setcursor_helper
+# malaminya
+	cp -a malaminya debian/collabkit/usr/lib/collabkit/
+	install -m 644 -D malaminya/images/icon0.png debian/collabkit/usr/share/icons/malaminya.png
+	install -m 644 -D debian/MalaMinya.desktop debian/collabkit/usr/share/applications/malaminya.desktop
 # icons
 	install -m 644 -D res/collabkit-started.svg debian/collabkit/usr/share/icons/collabkit-started.svg
 	install -m 644 -D res/collabkit-stopped.svg debian/collabkit/usr/share/icons/collabkit-stopped.svg
 # desktop file
-	install -m 644 -D debian/CollabKit.desktop debian/collabkit/usr/share/applications/CollabKit.desktop
+	install -m 644 -D debian/CollabKit.desktop debian/collabkit/usr/share/applications/collabkit.desktop
 # now the docs
 	install -m 644 -D debian/copyright debian/collabkit/usr/share/doc/collabkit/copyright
 	install -m 644 -D README debian/collabkit/usr/share/doc/collabkit/README
@@ -26,5 +30,5 @@ binary-indep:
 	dh_md5sums
 	dpkg-deb -b debian/collabkit ../collabkit_$(VERSION)_i386.deb
 clean:
-	if [ -d debian/tmp ]; then rm -r debian/tmp; fi
+	if [ -d debian/collabkit ]; then rm -r debian/collabkit; fi
 	if [ -f debian/files ]; then rm debian/files; fi
