@@ -9,11 +9,13 @@
 # -ncache <n>
 # -nofb
 # -threads
-X11VNC_OPTS="-shared -forever -mdns -multiptr -pointer_mode 4 -threads -afteraccept ./bin/setcursor_helper"
+X11VNC_OPTS="-shared -forever -mdns -multiptr -pointer_mode 4 -threads -afteraccept setcursor_helper"
 VIEWER_OPTS="-appshare -quality 7 -compresslevel 5"
 
     
 #######################################################################
+
+PATH=/usr/lib/collabkit:./bin:$PATH
 
 
 ANNOTATE_PIDFILE=/tmp/CK-annotate.pid
@@ -25,13 +27,13 @@ VNCVIEW_PIDFILE=/tmp/CK-vncview.pid
 start()
 {
         # first, start annotation app
-	./bin/gromit-mpx &
+	gromit-mpx &
 	echo $! > $ANNOTATE_PIDFILE
         # then, the VNC server x11vnc
-	./bin/x11vnc $X11VNC_OPTS &
+	x11vnc $X11VNC_OPTS &
 	echo $! > $VNCSERV_PIDFILE
 	# third, the vnc viewer to receive incoming windows
-	./bin/vncviewer $VIEWER_OPTS &
+	vncviewer $VIEWER_OPTS &
 	echo $! > $VNCVIEW_PIDFILE
 }
 
@@ -54,7 +56,7 @@ runastrayicon()
    while($RUN)
    do
         # off state
-        zenity --notification --text "CollabKit is STOPPED. Click here to start it." --window-icon=res/stopped.svg
+        zenity --notification --text "CollabKit is STOPPED. Click here to start it." --window-icon=$ICON_STOPPED
         zenity --question --text "Would you like to start CollabKit? Answering NO quits."
         if [ $? -eq 1 ]; then
             RUN=false
@@ -63,7 +65,7 @@ runastrayicon()
         start
         # on state
         zenity --info --text="CollabKit started." 
-        zenity --notification --text "CollabKit is RUNNING. Click here to stop it." --window-icon=res/started.svg
+        zenity --notification --text "CollabKit is RUNNING. Click here to stop it." --window-icon=$ICON_STARTED
         zenity --question --text "Would you like to stop CollabKit? Answering NO quits."
         if [ $? -eq 1 ]; then
             RUN=false
@@ -81,6 +83,23 @@ runastrayicon()
 
 # go to working directory
 cd `dirname $0`
+
+# find icons
+if [ -e /usr/share/icons/collabkit-started.svg ]; then
+	ICON_STARTED=/usr/share/icons/collabkit-started.svg
+else
+	# use local icon
+	ICON_STARTED=res/collabkit-started.svg
+fi
+
+if [ -e /usr/share/icons/collabkit-stopped.svg ]; then
+	ICON_STOPPED=/usr/share/icons/collabkit-stopped.svg
+else
+	# use local icon
+	ICON_STOPPED=res/collabkit-stopped.svg
+fi
+
+
 
 case "$1" in
   start)
