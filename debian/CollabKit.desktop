@@ -8,3 +8,4 @@ Exec=collabkit trayicon
 Name=CollabKit
 Comment=Start Collabkit.
 Icon=collabkit-started
+Categories=Application;Network;
