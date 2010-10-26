@@ -81,6 +81,32 @@ runastrayicon()
 
 
 
+checkrandr()
+{
+   NR_CONNECTED=`xrandr | grep " connected" | wc -l`
+   if [ $NR_CONNECTED -gt 1 ]; then
+        DISPLAYS=`xrandr | grep " connected" | awk '{print $1}'`
+        for i in $DISPLAYS; do 
+           ARGS="FALSE $i $ARGS"
+        done
+   	ANS=`zenity --title "Choose display to share" --list --text "There are several displays connected.\nWhich ones to share with CollabKit?" \
+   	--radiolist --column "Choose" --column "Display(s)" TRUE All $ARGS`
+	if [ "$ANS" = "All" -o -z "$ANS" ]; then
+	   return
+	fi
+	D=0
+	for i in $DISPLAYS; do
+	   if [ "$ANS" = "$i" ]; then
+	      break
+	   fi
+	   D=$((D+1))
+	done
+   	X11VNC_OPTS="$X11VNC_OPTS -clip xinerama$D"
+   fi
+}
+
+
+
 # go to working directory
 cd `dirname $0`
 
@@ -110,6 +136,7 @@ case "$1" in
 	stop
 	;;
   trayicon)
+        checkrandr
 	runastrayicon
 	;;
   *)
