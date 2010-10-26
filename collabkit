@@ -56,12 +56,6 @@ runastrayicon()
    while($RUN)
    do
         # off state
-        zenity --notification --text "CollabKit is STOPPED. Click here to start it." --window-icon=$ICON_STOPPED
-        zenity --question --text "Would you like to start CollabKit? Answering NO quits."
-        if [ $? -eq 1 ]; then
-            RUN=false
-            break
-        fi
         start
         # on state
         zenity --info --text="CollabKit started." 
@@ -74,6 +68,12 @@ runastrayicon()
         stop
         # off state
 	zenity --info --text="CollabKit stopped."
+	zenity --notification --text "CollabKit is STOPPED. Click here to start it." --window-icon=$ICON_STOPPED
+        zenity --question --text "Would you like to start CollabKit? Answering NO quits."
+        if [ $? -eq 1 ]; then
+            RUN=false
+            break
+        fi
    done
    
    stop
