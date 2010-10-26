@@ -1,0 +1,2 @@
+* Does not show any addititional mouse cursors when using RandR with
+  intel drivers. Clone mode works okay, though.
