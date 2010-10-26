@@ -94,12 +94,12 @@ checkrandr()
 	if [ "$ANS" = "All" -o -z "$ANS" ]; then
 	   return
 	fi
-	D=0
+	D=`echo $DISPLAYS | wc -w`
 	for i in $DISPLAYS; do
+	   D=$((D-1))
 	   if [ "$ANS" = "$i" ]; then
 	      break
 	   fi
-	   D=$((D+1))
 	done
    	X11VNC_OPTS="$X11VNC_OPTS -clip xinerama$D"
    fi
