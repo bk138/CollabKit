@@ -1,2 +1,4 @@
-* Does not show any addititional mouse cursors when using RandR with
-  intel drivers. Clone mode works okay, though.
+* At least when using the intel video driver, additional mouse cursors
+  are sometimes not shown when using RandR multi-head. Playing around with
+  different resolutions of local and attached display is known to help.
+  Clone mode works okay, though.

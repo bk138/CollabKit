@@ -13,4 +13,4 @@ To run some kind of interactively as a tray icon,
 $ ./CollabKit trayicon
 
 
-
+Known issues are listed in the BUGS file.
