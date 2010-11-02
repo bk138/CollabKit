@@ -1,4 +1,4 @@
-#! /bin/sh
+#! /bin/bash
 #
 # very simple minded startup script for CollabKit
 # created by Christian Beier <dontmind@freeshell.org>
@@ -24,6 +24,8 @@ VNCVIEW_PIDFILE=/tmp/CK-vncview.pid
 
 #set -e
 
+trap stop EXIT
+
 start()
 {
         # first, start annotation app
@@ -40,6 +42,7 @@ start()
 
 stop()
 {
+	echo stopping all collabkit processes...
 	[ -e $ANNOTATE_PIDFILE ] && kill `cat $ANNOTATE_PIDFILE`
         rm -f $ANNOTATE_PIDFILE
        	[ -e $VNCSERV_PIDFILE ] && kill -2 `cat $VNCSERV_PIDFILE`
