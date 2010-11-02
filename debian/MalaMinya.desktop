@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=MalaMinya
+Comment=Multi-User MPX Sketchpad
+Exec=/usr/lib/collabkit/malaminya/malaminya
+Icon=malaminya
+Terminal=false
+Categories=Graphics;2DGraphics;RasterGraphics;
