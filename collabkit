@@ -9,7 +9,7 @@
 # -ncache <n>
 # -nofb
 # -threads
-X11VNC_OPTS="-shared -forever -mdns -multiptr -pointer_mode 4 -threads -afteraccept setcursor_helper"
+X11VNC_OPTS="-shared -forever -mdns -multiptr -nowait_bog -pointer_mode 4 -threads -afteraccept setcursor_helper -extra_fbur 10 -setdefer 2 -nonap"
 VIEWER_OPTS="-appshare -quality 7 -compresslevel 5"
 
     
