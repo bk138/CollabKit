@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /bin/sh
 #
 # very simple minded startup script for CollabKit
 # created by Christian Beier <dontmind@freeshell.org>
@@ -24,7 +24,7 @@ VNCVIEW_PIDFILE=/tmp/CK-vncview.pid
 
 #set -e
 
-trap stop EXIT
+trap "{ stop; exit 1; }" SIGINT SIGQUIT
 
 start()
 {
