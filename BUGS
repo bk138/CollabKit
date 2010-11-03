@@ -2,3 +2,8 @@
   are sometimes not shown when using RandR multi-head. Playing around with
   different resolutions of local and attached display is known to help.
   Clone mode works okay, though.
+  
+* It can happen that you have to add a multicast default route, e. g.
+  when using ad-hoc networking. You can do this by issueing as root:
+  
+  $> route add -net 224.0.0.0 netmask 240.0.0.0 dev <output device>
