@@ -42,6 +42,7 @@ start()
 
 stop()
 {
+	xset r on
 	echo stopping all collabkit processes...
 	[ -e $ANNOTATE_PIDFILE ] && kill `cat $ANNOTATE_PIDFILE`
         rm -f $ANNOTATE_PIDFILE
