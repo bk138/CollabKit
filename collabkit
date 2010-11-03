@@ -24,7 +24,7 @@ VNCVIEW_PIDFILE=/tmp/CK-vncview.pid
 
 #set -e
 
-trap "{ stop; exit 1; }" SIGINT SIGQUIT
+trap "{ stop; exit 1; }" INT QUIT
 
 start()
 {
