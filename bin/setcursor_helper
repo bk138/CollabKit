@@ -5,4 +5,4 @@ PATH=/usr/lib/collabkit:`dirname $0`:$PATH
 RFB_CLIENT_ID=`echo $RFB_CLIENT_ID | sed s/0x//`
 # and go
 echo xi2setcursor called with label $RFB_CLIENT_ID
-xi2setcursor -label $RFB_CLIENT_ID &
+xi2setcursor -label $RFB_CLIENT_ID -sleep 500 &
