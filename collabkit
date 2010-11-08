@@ -46,7 +46,7 @@ stop()
 	echo stopping all collabkit processes...
 	[ -e $ANNOTATE_PIDFILE ] && kill `cat $ANNOTATE_PIDFILE`
         rm -f $ANNOTATE_PIDFILE
-       	[ -e $VNCSERV_PIDFILE ] && kill -2 `cat $VNCSERV_PIDFILE`
+       	[ -e $VNCSERV_PIDFILE ] && kill `cat $VNCSERV_PIDFILE`
 	rm -f $VNCSERV_PIDFILE
 	[ -e $VNCVIEW_PIDFILE ] && kill `cat $VNCVIEW_PIDFILE`
 	rm -f $VNCVIEW_PIDFILE
