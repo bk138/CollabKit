@@ -7,3 +7,10 @@
   when using ad-hoc networking. You can do this by issueing as root:
   
   $> route add -net 224.0.0.0 netmask 240.0.0.0 dev <output device>
+  
+* Current X servers (at least up to 1.9.0) only support 40 input devices.
+  Taking into account that each master pointer and keyboard pair has an
+  accompanying pair of XTEST devices, this leaves us with roughly 9
+  connected clients + 1 local user at max. Change MAXDEVICES in
+  include/misc.h in the X server sources and recompile your X server
+  if you want more.
