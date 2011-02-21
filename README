@@ -29,6 +29,10 @@ Known pitfalls & issues:
   
   $> route add -net 224.0.0.0 netmask 240.0.0.0 dev <output device>
   
+  In case you are using Network Manager to setup adhoc networking,
+  changing the connecntion's IP settings to link-local does this
+  automatically for you.
+  
 * Current X servers (at least up to 1.9.0) only support 40 input devices.
   Taking into account that each master pointer and keyboard pair has an
   accompanying pair of XTEST devices, this leaves us with roughly 9
