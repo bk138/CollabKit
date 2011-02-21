@@ -2,15 +2,36 @@
 This package provides the neccesary tools to run a CollabKit Server (provided there
 already is a MPX-enabled X Server installed).
 
-To start,run
+
+Once installed, CollabKit can be started from the main menu.
+
+
+To run from the command line, use
 $ ./CollabKit start
 
 To stop,
 $ ./CollabKit stop
 
-
 To run some kind of interactively as a tray icon,
 $ ./CollabKit trayicon
 
 
-Known issues are listed in the BUGS file.
+
+Known pitfalls & issues:
+
+* At least when using the intel video driver, additional mouse cursors
+  are sometimes not shown when using RandR multi-head. Playing around with
+  different resolutions of local and attached display is known to help.
+  Clone mode works okay, though.
+  
+* It can happen that you have to add a multicast default route, e. g.
+  when using ad-hoc networking. You can do this by issueing as root:
+  
+  $> route add -net 224.0.0.0 netmask 240.0.0.0 dev <output device>
+  
+* Current X servers (at least up to 1.9.0) only support 40 input devices.
+  Taking into account that each master pointer and keyboard pair has an
+  accompanying pair of XTEST devices, this leaves us with roughly 9
+  connected clients + 1 local user at max. Change MAXDEVICES in
+  include/misc.h in the X server sources and recompile your X server
+  if you want more.

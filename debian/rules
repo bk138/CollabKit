@@ -25,9 +25,6 @@ binary-indep:
 # now the docs
 	install -m 644 -D debian/copyright debian/collabkit/usr/share/doc/collabkit/copyright
 	install -m 644 -D README debian/collabkit/usr/share/doc/collabkit/README
-	install -m 644 -D BUGS debian/collabkit/usr/share/doc/collabkit/BUGS
-# the ifup script
-	install -m 755 -D debian/collabkit-mcast-route debian/collabkit/etc/network/if-up.d/collabkit-mcast-route
 # and pack it up
 	gzip -c9 debian/changelog > debian/collabkit/usr/share/doc/collabkit/changelog.Debian.gz
 	dh_shlibdeps
