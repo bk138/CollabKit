@@ -23,19 +23,31 @@ Known pitfalls & issues:
   are sometimes not shown when using RandR multi-head. Playing around with
   different resolutions of local and attached display is known to help.
   Clone mode works okay, though.
-  
-* It can happen that you have to add a multicast default route, e. g.
-  when using ad-hoc networking. You can do this by issueing as root:
-  
-  $> route add -net 224.0.0.0 netmask 240.0.0.0 dev <output device>
-  
-  In case you are using Network Manager to setup adhoc networking,
-  changing the connecntion's IP settings to link-local does this
-  automatically for you.
-  
+
+
 * Current X servers (at least up to 1.9.0) only support 40 input devices.
   Taking into account that each master pointer and keyboard pair has an
   accompanying pair of XTEST devices, this leaves us with roughly 9
   connected clients + 1 local user at max. Change MAXDEVICES in
   include/misc.h in the X server sources and recompile your X server
   if you want more.
+
+
+* In case of using MulticastVNC with WLAN: some Wireless LAN chipsets
+  set the default multicast rate to 1Mbit/s regardless of the stations 
+  connected. The only known workaround is to manually set the device's
+  transmit rate to a fixed value. This can be done by:
+
+  $> iwconfig <device> rate <fixed rate>
+
+
+* In case of using MulticastVNC: It can happen that you have to add a 
+  multicast default route, e. g. when using wireless ad-hoc networking.
+  You can do this by issueing as root:
+
+  $> route add -net 224.0.0.0 netmask 240.0.0.0 dev <output device>
+
+  In case you are using Network Manager to setup adhoc networking,
+  changing the connecntion's IP settings to link-local does this
+  automatically for you.
+
