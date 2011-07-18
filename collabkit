@@ -9,7 +9,7 @@
 # -ncache <n>
 # -nofb
 # -threads
-X11VNC_OPTS="-shared -forever -mdns -mcast -multiptr -nowait_bog -pointer_mode 4 -threads -afteraccept setcursor_helper -extra_fbur 10 -setdefer 2 -nonap"
+MXVNC_OPTS="-mcast -speeds lan -nowait_bog -pointer_mode 4 -threads -afteraccept setcursor_helper -extra_fbur 10 -setdefer 2 -nonap"
 VIEWER_OPTS="-appshare -acceptpopup -viewonly -quality 7 -compresslevel 5"
 
     
@@ -31,8 +31,8 @@ start()
         # first, start annotation app
 	gromit-mpx &
 	echo $! > $ANNOTATE_PIDFILE
-        # then, the VNC server x11vnc
-	x11vnc $X11VNC_OPTS &
+        # then, the VNC server MXVNC
+	mxvnc $MXVNC_OPTS &
 	echo $! > $VNCSERV_PIDFILE
 	# third, the vnc viewer to receive incoming windows
 	vncviewer $VIEWER_OPTS &
@@ -105,7 +105,7 @@ checkrandr()
 	      break
 	   fi
 	done
-   	X11VNC_OPTS="$X11VNC_OPTS -clip xinerama$D"
+   	MXVNC_OPTS="$MXVNC_OPTS -clip xinerama$D"
    fi
 }
 
