@@ -2,4 +2,4 @@
 
 # go to working dir
 cd `dirname $0`/bin
-./malaminya
+./malaminya $*
